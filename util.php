@@ -24,8 +24,8 @@ require_once 'google-api-php-client/src/contrib/Google_MirrorService.php';
 
 function store_credentials($user_id, $credentials) {
   $db = init_db();
-  $user_id = PDO::escapeString(strip_tags($user_id));
-  $credentials = PDO::escapeString(strip_tags($credentials));
+  $user_id = $db->quote(strip_tags($user_id));
+  $credentials = $db->quote(strip_tags($credentials));
 
   $insert = "insert or replace into credentials values ('$user_id', '$credentials')";
   $db->exec($insert);
@@ -34,11 +34,12 @@ function store_credentials($user_id, $credentials) {
 
 function get_credentials($user_id) {
   $db = init_db();
-  $user_id = PDO::escapeString(strip_tags($user_id));
+  $user_id = $db->quote(strip_tags($user_id));
 
-  $query = $db->query("select * from credentials where userid = '$user_id'");
+  $query = $db->prepare("select * from credentials where userid = '$user_id'");
+  $query->execute();
 
-  $row = $query->fetchArray(PDO_ASSOC);
+  $row = $query->fetch(PDO::FETCH_ASSOC);
   return $row['credentials'];
 }
 
@@ -46,9 +47,11 @@ function list_credentials() {
   $db = init_db();
 
   // Must use explicit select instead of * to get the rowid
-  $query = $db->query('select userid, credentials from credentials');
+  $query = $db->prepare('select userid, credentials from credentials');
+  $query->execute();
+  
   $result = array();
-  while ($singleResult = $query->fetchArray(PDO_ASSOC)){
+  while ($singleResult = $query->fetch(PDO::FETCH_ASSOC)){
     array_push($result,$singleResult);
   }
   return $result;
@@ -60,13 +63,13 @@ function init_db() {
   //global $sqlite_database;
 
   $db = new PDO('mysql:unix_socket=/cloudsql/gcdc2013-wildlab:database;charset=utf8',
-	  'wildlab',
-  	  'robins1'
+	  'root',
+  	  ''
 	);
 
   $test_query = "select count(*) from sqlite_master where name = 'credentials'";
 
-  if ($db->querySingle($test_query) == 0) {
+  if ($db->query($test_query) == 0) {
     $create_table = "create table credentials (userid text not null unique, " .
         "credentials text not null);";
     $db->exec($create_table);
