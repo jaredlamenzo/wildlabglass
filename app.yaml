@@ -1,4 +1,4 @@
-application: gcdc2013-wildlab
+application: wildlabglass
 version: 1
 runtime: php
 api_version: 1
