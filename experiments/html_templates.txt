@@ -1,0 +1,59 @@
+
+//------------------------------------------------------
+// initial test
+//------------------------------------------------------
+
+{
+  "kind": "mirror#timelineItem",
+  "id": "ec5ac8d3-5ea8-4cac-9d70-8d98e15c1d33",
+  "created": "2013-11-16T00:19:25.146Z",
+  "updated": "2013-11-16T00:19:25.146Z",
+  "etag": "1384561165146",
+  "text": "Gillybird | 2013-11-15 03:16:01 Sighted 1 Belted Kingfisher in 59448-59506 Jeron Drive, Lacombe, LA 70445, USA",
+  "attachments": [
+    {
+      "id": "bs:3faa4c62-8103-4720-bea8-5a9103eb666b",
+      "contentType": "image/jpeg"
+    }
+  ],
+  "notification": {
+    "level": "DEFAULT"
+  }
+}
+
+
+//------------------------------------------------------
+// first html template format
+//------------------------------------------------------
+
+{
+  "html": "<article style=\"left: 0px; visibility: visible;\">\n  <section>\n    <div class=\"text-medium\" style=\"\">\n      <p class=\"yellow\">American Robin</p>\n     </div> <div class=\"text-small\" style=\"\">City, State</div>  </section>\n  <footer>\n    <div>Sighted by Username</div>\n  </footer>\n</article>",
+  "notification": {
+    "level": "DEFAULT"
+  }
+}
+
+
+//------------------------------------------------------
+// reformatted based on Jared's template
+//------------------------------------------------------
+
+{
+  "kind": "mirror#timelineItem",
+  "id": "ec5ac8d3-5ea8-4cac-9d70-8d98e15c1d33",
+  "created": "2013-11-16T00:19:25.146Z",
+  "updated": "2013-11-16T00:19:25.146Z",
+  "etag": "1384561165146",
+  
+    "html": "<article style=\"left: 0px; visibility: visible;\">\n  <section>\n    <div class=\"text-medium\" style=\"\">\n      <p class=\"yellow\">American Robin</p>\n     </div> <div class=\"text-small\" style=\"\">City, State</div>  </section>\n  <footer>\n    <div>Sighted by Username</div>\n  </footer>\n</article>",
+        
+  "attachments": [
+    {
+      "id": "bs:3faa4c62-8103-4720-bea8-5a9103eb666b",
+      "contentType": "image/jpeg"
+    }
+  ],
+  "notification": {
+    "level": "DEFAULT"
+  }
+}

@@ -1,0 +1,46 @@
+application: gcdc2013-wildlab
+version: 1
+runtime: php
+api_version: 1
+threadsafe: yes
+
+handlers:
+- url: /static
+  static_dir: static
+
+- url: /experiments
+  static_dir: experiments
+
+- url: /config.php
+  script: config.php
+
+- url: /attachment-proxy.php
+  script: attachment-proxy.php
+
+- url: /favicon.ico
+  static_files: favicon.ico
+  upload: favicon.ico
+
+- url: /insertMostRecentSightingAllUsers.php
+  script: insertMostRecentSightingAllUsers.php
+
+- url: /mirror-client.php
+  script: mirror-client.php
+
+- url: /notify.php
+  script: notify.php
+
+- url: /oauth2callback.php
+  script: oauth2callback.php
+
+- url: /signout.php
+  script: signout.php
+
+- url: /util.php
+  script: util.php
+
+- url: /index.php
+  script: index.php
+
+- url: /.*
+  script: index.php
