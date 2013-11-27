@@ -60,11 +60,13 @@ function list_credentials() {
 
 // Create the credential storage if it does not exist
 function init_db() {
-  //global $sqlite_database;
+  global $db_path;
+  global $db_username;
+  global $db_pwd;
 
-  $db = new PDO('mysql:unix_socket=/cloudsql/gcdc2013-wildlab:database;charset=utf8',
-	  'root',
-  	  ''
+  $db = new PDO($db_path,
+	  $db_username,
+  	  $db_pwd
 	);
 
   $test_query = "select count(*) from sqlite_master where name = 'credentials'";
