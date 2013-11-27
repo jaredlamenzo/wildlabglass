@@ -18,9 +18,9 @@
 
 // TODO: You must configure these fields for the starter project to function.
 // Visit https://developers.google.com/glass/getting-started to learn more
-$api_client_id = "262253778225.apps.googleusercontent.com";
-$api_client_secret = "rjTHVfgpDy9dwIo3bhGwSJmr";
-$api_simple_key = "AIzaSyBsn2FNzHDoZ9R5sEuO4YlNw_lmEBQoJkI";
+$api_client_id = "91469454054.apps.googleusercontent.com";
+$api_client_secret = "o_Vfjx6LcIbCJDi3hGbCr3H7";
+$api_simple_key = "AIzaSyCp81hY26Dy0nQ79267MSCyythKEv57elY";
 
 $base_url = "https://wildlabglass.appspot.com";
 
