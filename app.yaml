@@ -42,5 +42,8 @@ handlers:
 - url: /index.php
   script: index.php
 
-- url: /.*
+- url: /google-api-php-client/examples/plus/index.php
+  script: google-api-php-client/examples/plus/index.php
+  
+- url: /
   script: index.php

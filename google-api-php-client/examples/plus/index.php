@@ -23,10 +23,11 @@ $client = new Google_Client();
 $client->setApplicationName("Google+ PHP Starter Application");
 // Visit https://code.google.com/apis/console to generate your
 // oauth2_client_id, oauth2_client_secret, and to register your oauth2_redirect_uri.
-// $client->setClientId('insert_your_oauth2_client_id');
-// $client->setClientSecret('insert_your_oauth2_client_secret');
-// $client->setRedirectUri('insert_your_oauth2_redirect_uri');
-// $client->setDeveloperKey('insert_your_developer_key');
+
+$client->setClientId('91469454054-nd2tbk1lfhnjti4rbhgljulv0m0orcir.apps.googleusercontent.com');
+$client->setClientSecret('o_Vfjx6LcIbCJDi3hGbCr3H7');
+$client->setRedirectUri('http://wildlabglass.appspot.com/google-api-php-client/examples/plus/index.php');
+$client->setDeveloperKey('AIzaSyCp81hY26Dy0nQ79267MSCyythKEv57elY');
 $plus = new Google_PlusService($client);
 
 if (isset($_REQUEST['logout'])) {
