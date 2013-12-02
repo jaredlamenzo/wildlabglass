@@ -24,11 +24,6 @@ $api_simple_key = "AIzaSyBsn2FNzHDoZ9R5sEuO4YlNw_lmEBQoJkI";
 
 $base_url = "https://wildlabglass.appspot.com";
 
-// This should be writable by your web server's user
-//$sqlite_database = "/tmp/database.sqlite";
-
-//this is new code for Google Cloud SQL Instance
-// $db = new PDO('mysql:unix_socket=/cloudsql/gcdc2013-wildlab:my-cloudsql-instance;charset=utf8',
-  // 'wildlab',
-  // 'robins1'
-// );
+$db_path = 'mysql:unix_socket=/cloudsql/gcdc2013-wildlab:database;charset=utf8';
+$db_username = 'root';
+$db_pwd = '';
