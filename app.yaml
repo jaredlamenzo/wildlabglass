@@ -8,9 +8,6 @@ handlers:
 - url: /static
   static_dir: static
 
-- url: /experiments
-  static_dir: experiments
-
 - url: /config.php
   script: config.php
 
@@ -47,3 +44,7 @@ handlers:
   
 - url: /
   script: index.php
+
+- url: /experiments/db_test.php
+  script: experiments/db_test.php
+

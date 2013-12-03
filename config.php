@@ -18,12 +18,17 @@
 
 // TODO: You must configure these fields for the starter project to function.
 // Visit https://developers.google.com/glass/getting-started to learn more
-$api_client_id = "262253778225.apps.googleusercontent.com";
-$api_client_secret = "rjTHVfgpDy9dwIo3bhGwSJmr";
-$api_simple_key = "AIzaSyBsn2FNzHDoZ9R5sEuO4YlNw_lmEBQoJkI";
+
+//https://cloud.google.com/console?redirected=true#/project/apps~wildlabglass/apiui/app/WEB/91469454054-nd2tbk1lfhnjti4rbhgljulv0m0orcir.apps.googleusercontent.com
+$api_client_id = "91469454054-nd2tbk1lfhnjti4rbhgljulv0m0orcir.apps.googleusercontent.com";
+$api_client_secret = "o_Vfjx6LcIbCJDi3hGbCr3H7";
+$api_simple_key = "AIzaSyC8Ao2jDS-cgsObhg0ukwobxw6k3L5Q3MM";
 
 $base_url = "https://wildlabglass.appspot.com";
 
-$db_path = 'mysql:unix_socket=/cloudsql/gcdc2013-wildlab:database;charset=utf8';
+//https://cloud.google.com/console#/project/apps~wildlabglass/sql/instances/wildlabglass
+$db_path = '/cloudsql/wildlabglass:wildlabglass'; //https://developers.google.com/appengine/docs/php/cloud-sql/
 $db_username = 'root';
-$db_pwd = '';
+//$db_pwd = 'test001'; // damn, for some reason the password is null
+$db_pwd = null;
+$db_name = 'glass_db'; //database is pre-created at http://23.236.58.219/phpmyadmin/

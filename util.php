@@ -24,60 +24,75 @@ require_once 'google-api-php-client/src/contrib/Google_MirrorService.php';
 
 function store_credentials($user_id, $credentials) {
   $db = init_db();
-  $user_id = $db->quote(strip_tags($user_id));
-  $credentials = $db->quote(strip_tags($credentials));
+  $user_id = $db->real_escape_string(strip_tags($user_id));
+  $credentials = $db->real_escape_string(strip_tags($credentials));
 
-  $insert = "insert or replace into credentials values ('$user_id', '$credentials')";
-  $db->exec($insert);
+  $insert = "REPLACE INTO credentials VALUES ('$user_id', '$credentials')";
+  $db->query($insert);
 
+  $db->close();
 }
 
 function get_credentials($user_id) {
   $db = init_db();
-  $user_id = $db->quote(strip_tags($user_id));
+  $user_id = $db->real_escape_string(strip_tags($user_id));
 
-  $query = $db->prepare("select * from credentials where userid = '$user_id'");
-  $query->execute();
+  $query_statement = "SELECT * FROM credentials WHERE userid = '$user_id'";
+  $result = $db->query($query_statement);
 
-  $row = $query->fetch(PDO::FETCH_ASSOC);
+  $row = $result->fetch_array(MYSQLI_ASSOC);
+  $db->close();
   return $row['credentials'];
 }
 
 function list_credentials() {
-  $db = init_db();
+  	$db = init_db();
 
-  // Must use explicit select instead of * to get the rowid
-  $query = $db->prepare('select userid, credentials from credentials');
-  $query->execute();
+	$query_statement = "SELECT userid, credentials FROM credentials";
+	$result = $db->query($query_statement);
   
-  $result = array();
-  while ($singleResult = $query->fetch(PDO::FETCH_ASSOC)){
-    array_push($result,$singleResult);
-  }
-  return $result;
+	$resultArray = array();
+  	while ($singleResult = $result->fetch_array(MYSQLI_ASSOC)){
+    	array_push($resultArray, $singleResult);
+  	}
+  
+  	$db->close();
+  
+  	return $resultArray;
 
 }
 
 // Create the credential storage if it does not exist
 function init_db() {
-  global $db_path;
-  global $db_username;
-  global $db_pwd;
+	global $db_username;
+	global $db_pwd;
+	global $db_name;
+	global $db_path;
 
-  $db = new PDO($db_path,
-	  $db_username,
-  	  $db_pwd
-	);
+	$mysqli = new mysqli(null, $db_username, $db_pwd, $db_name, null, $db_path);
 
-  $test_query = "select count(*) from sqlite_master where name = 'credentials'";
+	if ($mysqli->connect_errno) {
+    	throw new Exception($mysqli->connect_error);
+		$mysqli->close();
+		exit();
+	} else {
 
-  if ($db->query($test_query) == 0) {
-    $create_table = "create table credentials (userid text not null unique, " .
-        "credentials text not null);";
-    $db->exec($create_table);
-  }
-  return $db;
+		// Create table if not exist 
+		$statement="CREATE TABLE IF NOT EXISTS credentials (userid VARCHAR(255) NOT NULL UNIQUE, credentials TEXT NOT NULL)";
+	
+		// Execute query
+		if ($mysqli->query($statement))
+		{
+			// do nothing
+		} else {
+			throw new Exception(mysqli_error($mysqli));
+		}
+
+	}
+	return $mysqli;
 }
+
+
 
 function bootstrap_new_user() {
   global $base_url;
