@@ -1,0 +1,4 @@
+cron:
+- description: bird sighting job
+  url: /insertMostRecentSightingAllUsers.php
+  schedule: every 1 hours

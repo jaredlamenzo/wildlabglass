@@ -1,0 +1,16 @@
+{
+	"html": "<article><img src=\"glass://map?w=640&h=360&marker=0;42.27758400,-71.24744400\"height=\"360\" width=\"640\"></article>",
+	"menuItems": [
+		{
+			"action": "SHARE"
+		}, 
+		
+		{
+			"action": "DELETE"
+		}
+	]
+}
+
+
+
+

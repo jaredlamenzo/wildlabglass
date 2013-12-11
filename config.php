@@ -22,9 +22,11 @@
 //https://cloud.google.com/console?redirected=true#/project/apps~wildlabglass/apiui/app/WEB/91469454054-nd2tbk1lfhnjti4rbhgljulv0m0orcir.apps.googleusercontent.com
 $api_client_id = "91469454054-nd2tbk1lfhnjti4rbhgljulv0m0orcir.apps.googleusercontent.com";
 $api_client_secret = "o_Vfjx6LcIbCJDi3hGbCr3H7";
-$api_simple_key = "AIzaSyC8Ao2jDS-cgsObhg0ukwobxw6k3L5Q3MM";
+$api_simple_key = "AIzaSyCp81hY26Dy0nQ79267MSCyythKEv57elY";
 
 $base_url = "https://wildlabglass.appspot.com";
+
+
 
 //https://cloud.google.com/console#/project/apps~wildlabglass/sql/instances/wildlabglass
 $db_path = '/cloudsql/wildlabglass:wildlabglass'; //https://developers.google.com/appengine/docs/php/cloud-sql/
@@ -32,3 +34,12 @@ $db_username = 'root';
 //$db_pwd = 'test001'; // damn, for some reason the password is null
 $db_pwd = null;
 $db_name = 'glass_db'; //database is pre-created at http://23.236.58.219/phpmyadmin/
+
+
+
+
+
+$contact_id = "wildlab-glass-contact";
+$contact_name = "The WildLab Dev";
+
+

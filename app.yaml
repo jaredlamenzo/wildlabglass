@@ -18,9 +18,6 @@ handlers:
   static_files: favicon.ico
   upload: favicon.ico
 
-- url: /insertMostRecentSightingAllUsers.php
-  script: insertMostRecentSightingAllUsers.php
-
 - url: /mirror-client.php
   script: mirror-client.php
 
@@ -42,9 +39,22 @@ handlers:
 - url: /google-api-php-client/examples/plus/index.php
   script: google-api-php-client/examples/plus/index.php
   
-- url: /
-  script: index.php
+#- url: /
+#  script: index.php
 
-- url: /experiments/db_test.php
-  script: experiments/db_test.php
+- url: /
+  script: index_all.php
+
+#- url: /experiments/db_test.php
+#  script: experiments/db_test.php
+
+- url: /insertMostRecentSightingAllUsers.php
+  script: insertMostRecentSightingAllUsers.php
+
+- url: /insertMostRecentSightingMe.php
+  script: insertMostRecentSightingMe.php
+
+- url: /wildlab-glass-lib/examples/sightingsTest.php
+  script: wildlab-glass-lib/examples/sightingsTest.php
+
 

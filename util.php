@@ -96,6 +96,8 @@ function init_db() {
 
 function bootstrap_new_user() {
   global $base_url;
+  global $contact_id;
+  global $contact_name;
 
   $client = get_google_api_client();
   $client->setAccessToken(get_credentials($_SESSION['userid']));
@@ -103,14 +105,26 @@ function bootstrap_new_user() {
   // A glass service for interacting with the Mirror API
   $mirror_service = new Google_MirrorService($client);
 
+  //--------------------------------------------
+  // insert a welcome timeline item
+  //--------------------------------------------
   $timeline_item = new Google_TimelineItem();
-  $timeline_item->setText("Welcome to the Mirror API PHP Quick Start");
+  $timeline_item->setText("Welcome to the Wildlab Glass Dev");
 
   insert_timeline_item($mirror_service, $timeline_item, null, null);
 
-  insert_contact($mirror_service, "php-quick-start", "PHP Quick Start",
-      $base_url . "/static/images/chipotle-tube-640x360.jpg");
+  //--------------------------------------------
+  // insert a default contact
+  //--------------------------------------------
+  insert_contact($mirror_service, $contact_id, $contact_name,
+      $base_url . "/static/images/wildlab-640x360.jpg");
 
+  //--------------------------------------------
+  // subscribe to timeline notification
+  //--------------------------------------------
   subscribe_to_notifications($mirror_service, "timeline",
     $_SESSION['userid'], $base_url . "/notify.php");
 }
+
+
+

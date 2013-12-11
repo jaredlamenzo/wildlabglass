@@ -74,22 +74,64 @@ switch ($request['collection']) {
   case 'timeline':
     // Verify that it's a share
     foreach ($request['userActions'] as $i => $user_action) {
-      if ($user_action['type'] == 'SHARE') {
+    	//----------------------------------------
+    	// SHARE
+    	//----------------------------------------
+    	if ($user_action['type'] == 'SHARE') {
 
-        $timeline_item_id = $request['itemId'];
+	        // $timeline_item_id = $request['itemId'];
+// 	
+	        // $timeline_item = $mirror_service->timeline->get($timeline_item_id);
+	
+	        // Patch the item. Notice that since we retrieved the entire item above
+	        // in order to access the caption, we could have just changed the text
+	        // in place and used the update method, but we wanted to illustrate the
+	        // patch method here.
+	        
+	        // $patch = new Google_TimelineItem();
+	        // $patch->setHtml("<article>\n  <section>\n We're attempting to patch an existing card, but in fact a new one is inserted.</p>\n  </section>\n</article>\n");
+	        // $mirror_service->timeline->patch($timeline_item_id, $patch);
+	        break;
+      	}
+		
+		//----------------------------------------
+    	// CUSTOM
+    	//----------------------------------------
+    	if ($user_action['type'] == 'CUSTOM') {
 
-        $timeline_item = $mirror_service->timeline->get($timeline_item_id);
-
-        // Patch the item. Notice that since we retrieved the entire item above
-        // in order to access the caption, we could have just changed the text
-        // in place and used the update method, but we wanted to illustrate the
-        // patch method here.
-        $patch = new Google_TimelineItem();
-        $patch->setText("PHP Quick Start got your photo! " .
-            $timeline_item->getText());
-        $mirror_service->timeline->patch($timeline_item_id, $patch);
-        break;
-      }
+			// Ryan: it's not documented...
+			
+			if($user_action["payload"] == "show-map"){
+		        $currentTime = new DateTime();
+				$currentTimePlus = $currentTime->add(new DateInterval('PT3S')); // add 3 secs
+				$currentTimeMinus3 = $currentTime->sub(new DateInterval('PT3S')); // substract 3 secs
+				$currentTimeMinus1 = $currentTime->sub(new DateInterval('PT1S')); // substract 1 secs
+				
+				//--------------------------------
+				// patch origin card
+				//--------------------------------
+				$timeline_item_id = $request['itemId'];
+		        $timeline_item = $mirror_service->timeline->get($timeline_item_id);
+				$patch = new Google_TimelineItem();
+				$patch->setDisplayTime($currentTimeMinus3);
+		        $mirror_service->timeline->patch($timeline_item_id, $patch);
+	
+				//--------------------------------
+				// add map card
+				//--------------------------------
+				$newTimelineItem = new Google_TimelineItem();
+				// $notification = new Google_NotificationConfig();
+	    		// $notification->setLevel("DEFAULT");
+	    		// $newTimelineItem->setNotification($notification);
+		        //$newTimelineItem->setText("time: ". $currentTimeMinus1->format(DATE_RFC3339));
+		        $newTimelineItem->setText("this is supposed to be a map card");
+				$newTimelineItem->setDisplayTime($currentTimeMinus1);
+		        $mirror_service->timeline->insert($newTimelineItem);
+				
+		        break;
+	        }
+      	}
+		
     }
 
     break;
@@ -98,7 +140,7 @@ switch ($request['collection']) {
     $location = $mirror_service->locations->get($location_id);
     // Insert a new timeline card, with a copy of that photo attached
     $loc_timeline_item = new Google_TimelineItem();
-    $loc_timeline_item->setText("PHP Quick Start says you are now at " .
+    $loc_timeline_item->setText( $contact_name ." says you are now at " .
         $location->getLatitude() . " by " . $location->getLongitude());
 
     insert_timeline_item($mirror_service, $loc_timeline_item, null, null);

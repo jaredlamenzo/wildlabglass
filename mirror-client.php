@@ -35,7 +35,7 @@ function get_google_api_client() {
   $client = new Google_Client();
 
   $client->setUseObjects(true);
-  $client->setApplicationName('Google Mirror API PHP Quick Start');
+  $client->setApplicationName('Google Mirror API Wildlab Glass Dev');
 
   // These are set in config.php
   $client->setClientId($api_client_id);
@@ -122,11 +122,11 @@ function subscribe_to_notifications($service, $collection, $user_token, $callbac
   }
 }
 
-function insert_contact($service, $contact_id, $display_name, $icon_url)
+function insert_contact($service, $contactId, $display_name, $icon_url)
 {
   try {
     $contact = new Google_Contact();
-    $contact->setId($contact_id);
+    $contact->setId($contactId);
     $contact->setDisplayName($display_name);
     $contact->setImageUrls(array($icon_url));
     return $service->contacts->insert($contact);
@@ -142,9 +142,9 @@ function insert_contact($service, $contact_id, $display_name, $icon_url)
  * @param Google_MirrorService $service Authorized Mirror service.
  * @param string $contact_id ID of the Contact to delete.
  */
-function delete_contact($service, $contact_id) {
+function delete_contact($service, $contactId) {
   try {
-    $service->contacts->delete($contact_id);
+    $service->contacts->delete($contactId);
   } catch (Exception $e) {
     print 'An error occurred: ' . $e->getMessage();
   }
