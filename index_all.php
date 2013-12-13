@@ -22,6 +22,10 @@ require_once 'google-api-php-client/src/Google_Client.php';
 require_once 'google-api-php-client/src/contrib/Google_MirrorService.php';
 require_once 'util.php';
 
+require_once 'wildlab-glass-lib/src/sighting/Sighting.php';
+require_once 'wildlab-glass-lib/src/sighting/SightingsProxy.php';
+require_once 'wildlab-glass-lib/src/sighting/TemplateFactory.php';
+
 $client = get_google_api_client();
 
 // Authenticate if we're not already
@@ -137,13 +141,6 @@ switch ($_POST['operation']) {
     $message = "A timeline item has been deleted.";
     break;
 	
-  // case 'insertSightingsToAllUsers':
-	  // $message = file_get_contents($base_url ."/insertMostRecentSightingAllUsers.php");
-	  // break;
-// 
-  // case 'insertSightingsToMe':
-	  // $message = file_get_contents($base_url ."/insertMostRecentSightingMe.php");
-	  // break;
 }
 
 //Load cool stuff to show them.
@@ -170,7 +167,7 @@ foreach ($subscriptions->getItems() as $subscription) {
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Glassware Starter Project</title>
+  <title>The WildLab for Glass Dev</title>
   <link href="./static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
   <link href="./static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
   <link href="./static/main.css" rel="stylesheet" media="screen">
@@ -179,7 +176,7 @@ foreach ($subscriptions->getItems() as $subscription) {
 <div class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">Glassware Starter Project: PHP Edition</a>
+      <a class="brand" href="#">The WildLab for Glass Dev</a>
     </div>
   </div>
 </div>
@@ -377,76 +374,36 @@ foreach ($subscriptions->getItems() as $subscription) {
   </div>
     <div class="row">
       <div class="span4">
-	    <h2>Send Sighting to me</h2>
-	    <p>Let's send a recent sighting to just me!</p>
+	    <h2>Send a Sighting to me</h2>
 		<?php
-			$url="http://www.thewildlab.org/sighting/feeds/";
 		
-		    $json = file_get_contents($url);
-			
-			// see http://php.net/manual/en/function.json-decode.php
-		    //$data = json_decode($json, TRUE);
-			//var_dump($data["sighting_list"][0]["sighting_id"]);
+			$latestSighting = SightingsProxy::Instance()->getSightingByIndex(0);	
 		
-			
-			$data = json_decode($json, TRUE);
-			$wl_username = $data["sighting_list"][0]["username"];
-			$wl_sightingtime = $data["sighting_list"][0]["sighting_time"];
-			$wl_species_name = $data["sighting_list"][0]["species_name"];
-			$wl_location = $data["sighting_list"][0]["location"];
-			$wl_number_sighted = $data["sighting_list"][0]["number_sighted"];
-			
-			$wl_city = $data["sighting_list"][0]["city"];
-			$wl_state = $data["sighting_list"][0]["state"];
-			
-			$wl_image_url = "http://zonefive.us/glassfun/images/" . $data["sighting_list"][0]["folder"] . ".jpg";
-			
-			echo("Content grabbed from " . $url . ":");
+			echo("Username: " . $latestSighting -> username);
 			echo("<br/>");
+			echo("Sighting Time: " . $latestSighting -> sightingtime);
 			echo("<br/>");
-			echo("username: " . $wl_username);
+			echo("Species Name: " . $latestSighting -> species_name);
 			echo("<br/>");
-			echo("sighting_time: " . $wl_sightingtime);
+			echo("Location: " . $latestSighting -> location);
 			echo("<br/>");
-			echo("species_name: " . $wl_species_name);
-			echo("<br/>");
-			echo("location: " . $wl_location);
-			echo("<br/>");
-			echo "image:";
-			echo "<br/>";
-			echo("<img src='". $wl_image_url . "'>") ;
-			
-			// $wl_msg_str = $wl_username . " | " . $wl_sightingtime . " Sighted " . $wl_number_sighted . " " .$wl_species_name . " in " . $wl_location;
-		
+			echo("<img src='". $latestSighting -> image_url . "'>") ;
 		?>
+	    <br/>
 	    <br/>
 	    <form action="insertMostRecentSightingMe.php" method="post">
 	        <button class="btn btn-block" type="submit">Insert a sighting</button>
 	    </form>
-	    <!--form method="post">
-	      <input type="hidden" name="operation" value="insertSightingsToMe">
-	      <button class="btn btn-block" type="submit">
-	        Insert a sighting to myself
-	      </button>
-	    </form-->
-
     </div>
     
     <div class="span4">
-	    <h2>Send Sighting to All</h2>
+	    <h2>Send a Sighting to All</h2>
 	    <p>Let's send the most recent sighting to all users</p>
 	    <p>(It will call insertMostRecentSightingAllUsers.php)</p>
 
 	    <form action="insertMostRecentSightingAllUsers.php" method="post">
 	        <button class="btn btn-block" type="submit">Insert a sighting to all users</button>
 	    </form>
-
-	    <!--form method="post">
-	      <input type="hidden" name="operation" value="insertSightingsToAllUsers">
-	      <button class="btn btn-block" type="submit">
-	        Insert a sighting to all users
-	      </button>
-	    </form-->
 
     </div>
 

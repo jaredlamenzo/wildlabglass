@@ -33,17 +33,11 @@ handlers:
 - url: /util.php
   script: util.php
 
-- url: /index.php
-  script: index.php
-
-- url: /google-api-php-client/examples/plus/index.php
-  script: google-api-php-client/examples/plus/index.php
+#- url: /google-api-php-client/examples/plus/index.php
+#  script: google-api-php-client/examples/plus/index.php
   
 #- url: /
 #  script: index.php
-
-- url: /
-  script: index_all.php
 
 #- url: /experiments/db_test.php
 #  script: experiments/db_test.php
@@ -54,7 +48,11 @@ handlers:
 - url: /insertMostRecentSightingMe.php
   script: insertMostRecentSightingMe.php
 
-- url: /wildlab-glass-lib/examples/sightingsTest.php
-  script: wildlab-glass-lib/examples/sightingsTest.php
+#- url: /wildlab-glass-lib/examples/sightingsTest.php
+#  script: wildlab-glass-lib/examples/sightingsTest.php
 
+#- url: /
+#  script: index_all.php
 
+- url: /
+  script: index.php
