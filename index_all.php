@@ -136,6 +136,14 @@ switch ($_POST['operation']) {
     delete_timeline_item($mirror_service, $_POST['itemId']);
     $message = "A timeline item has been deleted.";
     break;
+	
+  // case 'insertSightingsToAllUsers':
+	  // $message = file_get_contents($base_url ."/insertMostRecentSightingAllUsers.php");
+	  // break;
+// 
+  // case 'insertSightingsToMe':
+	  // $message = file_get_contents($base_url ."/insertMostRecentSightingMe.php");
+	  // break;
 }
 
 //Load cool stuff to show them.
@@ -415,6 +423,12 @@ foreach ($subscriptions->getItems() as $subscription) {
 	    <form action="insertMostRecentSightingMe.php" method="post">
 	        <button class="btn btn-block" type="submit">Insert a sighting</button>
 	    </form>
+	    <!--form method="post">
+	      <input type="hidden" name="operation" value="insertSightingsToMe">
+	      <button class="btn btn-block" type="submit">
+	        Insert a sighting to myself
+	      </button>
+	    </form-->
 
     </div>
     
@@ -426,6 +440,13 @@ foreach ($subscriptions->getItems() as $subscription) {
 	    <form action="insertMostRecentSightingAllUsers.php" method="post">
 	        <button class="btn btn-block" type="submit">Insert a sighting to all users</button>
 	    </form>
+
+	    <!--form method="post">
+	      <input type="hidden" name="operation" value="insertSightingsToAllUsers">
+	      <button class="btn btn-block" type="submit">
+	        Insert a sighting to all users
+	      </button>
+	    </form-->
 
     </div>
 

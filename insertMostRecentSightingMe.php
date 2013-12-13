@@ -15,7 +15,8 @@ $client = get_google_api_client();
 if (!isset($_SESSION['userid']) || get_credentials($_SESSION['userid']) == null) {
   header('Location: ' . $base_url . '/oauth2callback.php');
   exit;
-} else {
+} 
+else {
   verify_credentials(get_credentials($_SESSION['userid']));
   $client->setAccessToken(get_credentials($_SESSION['userid']));
 }
@@ -26,7 +27,12 @@ $mirror_service = new Google_MirrorService($client);
 
 // latest sighting
 $latestSighting = SightingsProxy::Instance()->getSightingByIndex(0);	
-$htmlText = TemplateFactory::Instance()->getSightingCoverArticle($latestSighting) . TemplateFactory::Instance()->getMapArticle($latestSighting);
+$userLocation = $mirror_service->locations->get('latest');
+$htmlText = TemplateFactory::Instance()->getSightingCoverArticle($latestSighting) . 
+					TemplateFactory::Instance()->getMapArticle($latestSighting, $userLocation) .
+					TemplateFactory::Instance()->getSightingSpeciesOnly($latestSighting) .
+					TemplateFactory::Instance()->getSightingMoreInfo($latestSighting) .
+					TemplateFactory::Instance()->getSightingNote($latestSighting);
 // end of organize data -----------------------------------------------
 
 
