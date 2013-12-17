@@ -36,12 +36,14 @@ $mirror_service = new Google_MirrorService($client);
   <link href="./static/main.css" rel="stylesheet" media="screen">
   <style type="text/css">
 	.footerText {
+		font-size: 12px;
 		color: #FFF;
 	}
 	.span4 {
+		background-color: #545353;
+		color: #F9ED33;
 		height: 350px;
 		width: 280px;
-		background-color: rgb(243, 237, 212);
 		padding-left: 10px;
 		padding-top: 10px;
 		padding-right: 10px;
@@ -64,10 +66,9 @@ $mirror_service = new Google_MirrorService($client);
   <div class="alert alert-info"><?php echo $message; ?> </div>
   <?php } ?>
 
-  <h2>What does it do?</h2>
+  <h2>Experience the natural world like never before.</h2>
   <div class="row">
     <div style="margin-top: 5px; margin-left: 30px;">
-    	<p>Experience the natural world like never before.</p>
     	<p>Use the WildLab for Glass™ as your window onto the natural world. Envision a new kind of learning, framed by the sky and the earth.</p>
     	<p>You will receive notifications about wildlife near you, and contribute to our citizen science database:</p>
     	<ol>
@@ -82,7 +83,7 @@ $mirror_service = new Google_MirrorService($client);
     	
     <div class="row">
       <div class="span4">
-	    <h3>Send a Sighting to me</h3>
+	    <h3>Send Sighting to Me</h3>
 		<?php
 
 		$latestSighting = SightingsProxy::Instance() -> getSightingByIndex(0);
@@ -112,16 +113,16 @@ $mirror_service = new Google_MirrorService($client);
     
     <div class="span4">
 	    <h3>Upcoming</h3>
-	    <p>You will submit sightings by saying the species name followed by the quantity, e.g., "America Robins, 5."</p>
+	    <p>You will submit sightings by saying the species name followed by the quantity, e.g., "American Robins, 5."</p>
 	    <br/>
-	    <img src="./static/images/birds_x5.png"></img>
+	    <img src="./static/images/birds_x5_2.png"></img>
     </div>
 
     <div class="span4">
 	    <h3>Upcoming</h3>
 	    <p>You will select the frequency of updates using the toggles below. Currently they are sent every hour.</p>
 	    <br/>
-	    <img src="./static/images/toggle_fake.png"></img>
+	    <img src="./static/images/toggle_fake_2.png"></img>
     </div>
 
   </div>  
