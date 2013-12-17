@@ -167,7 +167,7 @@ foreach ($subscriptions->getItems() as $subscription) {
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The WildLab for Glass Dev</title>
+  <title>The WildLab for Glass</title>
   <link href="./static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
   <link href="./static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
   <link href="./static/main.css" rel="stylesheet" media="screen">
@@ -176,7 +176,7 @@ foreach ($subscriptions->getItems() as $subscription) {
 <div class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">The WildLab for Glass Dev</a>
+      <a class="brand" href="#">The WildLab for Glass</a>
     </div>
   </div>
 </div>

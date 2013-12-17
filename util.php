@@ -109,7 +109,7 @@ function bootstrap_new_user() {
   // insert a welcome timeline item
   //--------------------------------------------
   $timeline_item = new Google_TimelineItem();
-  $timeline_item->setText("Welcome to the Wildlab Glass Dev");
+  $timeline_item->setText("Welcome to the The WildLab for Glass");
 
   insert_timeline_item($mirror_service, $timeline_item, null, null);
 

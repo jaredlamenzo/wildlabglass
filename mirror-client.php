@@ -35,7 +35,7 @@ function get_google_api_client() {
   $client = new Google_Client();
 
   $client->setUseObjects(true);
-  $client->setApplicationName('Google Mirror API Wildlab Glass Dev');
+  $client->setApplicationName('Google Mirror API The WildLab for Glass');
 
   // These are set in config.php
   $client->setClientId($api_client_id);

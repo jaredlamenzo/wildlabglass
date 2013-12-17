@@ -40,6 +40,6 @@ $db_name = 'glass_db'; //database is pre-created at http://23.236.58.219/phpmyad
 
 
 $contact_id = "wildlab-glass-contact";
-$contact_name = "The WildLab Dev";
+$contact_name = "The WildLab for Glass";
 
 
