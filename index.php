@@ -62,9 +62,11 @@ $mirror_service = new Google_MirrorService($client);
 
 <div class="container">
 
-  <?php if ($message != "") { ?>
-  <div class="alert alert-info"><?php echo $message; ?> </div>
-  <?php } ?>
+  <div id="formResponse"></div>
+
+  <!--?php if ($message != "") { ?-->
+  <!--div id="formResponse" class="alert alert-info"><?php echo $message; ?> </div-->
+  <!--?php } ?-->
 
   <h2>Experience the natural world like never before.</h2>
   <div class="row">
@@ -84,8 +86,10 @@ $mirror_service = new Google_MirrorService($client);
     <div class="row">
       <div class="span4">
 	    <h3>Send Sighting to Me</h3>
+	    
 		<?php
-
+ 		// http://stackoverflow.com/questions/18171017/show-submitted-form-response-on-the-same-page-no-reload
+ 		
 		$latestSighting = SightingsProxy::Instance() -> getSightingByIndex(0);
 
 		/*
@@ -101,7 +105,7 @@ $mirror_service = new Google_MirrorService($client);
 		?>
 	    <br/>
 	    <br/>
-	    <form action="insertMostRecentSightingMe.php" method="post">
+	    <form id="insertMostRecentSightingMeForm" action="insertMostRecentSightingMe.php" method="post">
 	        <button class="btn btn-block" type="submit">Insert a sighting</button>
 	    </form>
 	    <br/>
@@ -143,5 +147,33 @@ $mirror_service = new Google_MirrorService($client);
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+
+<script>
+     $("#insertMostRecentSightingMeForm").submit(function(event) 
+     {
+         /* stop form from submitting normally */
+         event.preventDefault();
+
+         /* get some values from elements on the page: */
+         var $form = $( this ),
+             url = $form.attr('action');
+
+         /* Send the data using post */
+         var posting = $.post(url);
+
+         posting.done(function( data )
+         {
+             /* Put the results in a div */
+             $( "#formResponse" ).html(data);
+
+             /* Change the button text. */
+             //$submit.text('Sent, Thank you');
+
+             /* Disable the button. */
+             //$submit.attr("disabled", true);
+         });
+    });
+</script>
+
 </body>
 </html>

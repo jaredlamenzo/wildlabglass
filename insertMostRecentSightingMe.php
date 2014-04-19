@@ -57,7 +57,7 @@ insert_timeline_item($mirror_service, $new_timeline_item, null, null);
 //-------------------------------------
 // respond
 //-------------------------------------
-$message = "Timeline Item inserted!";
+$message = "<div id=\"formResponse\" class=\"alert alert-info\">The most recent sighting has been delivered to your Glass.</div>";
 echo $message;
 
 ?>
