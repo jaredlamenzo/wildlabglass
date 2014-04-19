@@ -33,7 +33,7 @@ $db_path = '/cloudsql/wildlabglass:wildlabglass'; //https://developers.google.co
 $db_username = 'root';
 //$db_pwd = 'test001'; // damn, for some reason the password is null
 $db_pwd = null;
-$db_name = 'glass_db'; //database is pre-created at http://23.236.58.219/phpmyadmin/
+$db_name = 'glass_db'; 
 
 
 
